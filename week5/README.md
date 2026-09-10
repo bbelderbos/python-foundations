@@ -1,8 +1,18 @@
-# Week 5 — Testing & Polish
+# Week 5: Testing & Polish
 
 Lesson: https://belderbos.dev/foundations/#week-5
 
-Rich table output, pytest-cov coverage, and an end-to-end CLI test.
+Move display into `journal/output.py` with a Rich table, then measure coverage. `output.py`
+is stubbed; `cli.py` already calls it. Fill it in until the tests pass.
 
-Starter code and tests for this week are coming. Follow the lesson to build it, and use
-your Week 4 project as the starting point.
+```bash
+uv sync
+uv run pytest -v        # red until output.list_entries is implemented
+# fill in journal/output.py
+uv run pytest -v        # green
+uv run pytest --cov=journal --cov-report=term-missing   # check coverage
+uv run ruff format .
+uv run ruff check --fix .
+```
+
+The solution is on the `solution` branch.
