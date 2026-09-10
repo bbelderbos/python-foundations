@@ -1,35 +1,46 @@
-from dataclasses import dataclass, field
+import json
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-# TODO: set the limits used by validation (see the Week 1 lesson).
-MAX_TITLE_LENGTH = 0
-MAX_CONTENT_LENGTH = 0
+MAX_TITLE_LENGTH = 50
+MAX_CONTENT_LENGTH = 1000
 
 
 @dataclass
 class JournalEntry:
-    # TODO: add fields: title (str), content (str),
-    #       tags (list[str], default_factory=list),
-    #       date (str, default_factory generating an ISO timestamp).
-    title: str = ""
+    title: str
+    content: str
+    tags: list[str] = field(default_factory=list)
+    date: str = field(default_factory=lambda: datetime.now().isoformat())
 
     def __post_init__(self) -> None:
-        # TODO: raise ValueError if title/content are empty or too long.
-        ...
+        if not self.title or len(self.title) > MAX_TITLE_LENGTH:
+            raise ValueError(
+                f"Title must be non-empty and <= {MAX_TITLE_LENGTH} characters"
+            )
+        if not self.content or len(self.content) > MAX_CONTENT_LENGTH:
+            raise ValueError(
+                f"Content must be non-empty and <= {MAX_CONTENT_LENGTH} characters"
+            )
 
 
 def save_entries(entries: list[JournalEntry], db_path: Path) -> None:
-    # TODO: convert entries to dicts and write them to db_path as JSON.
-    raise NotImplementedError
+    data = [asdict(entry) for entry in entries]
+    with open(db_path, "w") as f:
+        json.dump(data, f, indent=2)
 
 
 def load_entries(db_path: Path) -> list[JournalEntry]:
-    # TODO: read JSON from db_path and rebuild JournalEntry objects.
-    #       Return [] for a missing or empty file.
-    raise NotImplementedError
+    if not db_path.exists() or db_path.stat().st_size == 0:
+        return []
+    with open(db_path) as f:
+        data = json.load(f)
+    return [JournalEntry(**entry) for entry in data]
 
 
 def add_entry(title: str, content: str, tags: list[str], db_path: Path) -> None:
-    # TODO: load existing entries, append a new one, save them back.
-    raise NotImplementedError
+    entries = load_entries(db_path)
+    entry = JournalEntry(title=title, content=content, tags=tags)
+    entries.append(entry)
+    save_entries(entries, db_path)
