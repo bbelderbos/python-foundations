@@ -19,7 +19,7 @@ uv run pytest -v   # red at first: now make them green
 
 ## Branches
 
-- `main` — starter skeletons (tests plus stubs to fill in)
-- `solution` — the completed code for every week
+- `main`: starter skeletons (tests plus stubs to fill in)
+- `solution`: the completed code for every week
 
 Follow along: https://belderbos.dev/foundations/

@@ -1,4 +1,4 @@
-# Week 3 — Features & Search
+# Week 3: Features & Search
 
 Lesson: https://belderbos.dev/foundations/#week-3
 

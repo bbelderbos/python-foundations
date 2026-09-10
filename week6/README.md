@@ -1,4 +1,4 @@
-# Week 6 — Ship It
+# Week 6: Ship It
 
 Lesson: https://belderbos.dev/foundations/#week-6
 

@@ -1,4 +1,4 @@
-# Week 1 — Project Setup & Data Model
+# Week 1: Project Setup & Data Model
 
 Lesson: https://belderbos.dev/foundations/#week-1
 

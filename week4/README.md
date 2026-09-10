@@ -1,4 +1,4 @@
-# Week 4 — Code Organization & Testing
+# Week 4: Code Organization & Testing
 
 Lesson: https://belderbos.dev/foundations/#week-4
 

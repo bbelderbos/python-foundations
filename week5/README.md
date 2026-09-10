@@ -1,4 +1,4 @@
-# Week 5 — Testing & Polish
+# Week 5: Testing & Polish
 
 Lesson: https://belderbos.dev/foundations/#week-5
 
