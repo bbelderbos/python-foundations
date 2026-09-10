@@ -1,8 +1,24 @@
-# Week 2 — CLI & Type Safety
+# Week 2: CLI & Type Safety
 
 Lesson: https://belderbos.dev/foundations/#week-2
 
-Wrap the Week 1 functions in a Typer CLI (add, list) with type hints and error handling.
+Add a Typer CLI (`add` and `list`) on top of your Week 1 model and persistence. The Week 1
+code is already in `main.py`; the two commands are stubbed with TODOs.
 
-Starter code and tests for this week are coming. Follow the lesson to build it, and use
-your Week 1 project as the starting point.
+```bash
+uv sync
+uv run pytest -v        # Week 1 tests pass; the CLI tests are red
+# implement add() and list_entries() in main.py
+uv run pytest -v        # green
+uv run ruff format .
+uv run ruff check --fix .
+```
+
+Try it for real:
+
+```bash
+uv run main.py add --title "First entry" --content "Learned Typer" --tags "python"
+uv run main.py list
+```
+
+The solution is on the `solution` branch if you get truly stuck.
