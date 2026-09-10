@@ -2,7 +2,21 @@
 
 Lesson: https://belderbos.dev/foundations/#week-5
 
-Rich table output, pytest-cov coverage, and an end-to-end CLI test.
+Build in your own `dev-journal` repo, not in this folder: copy this week's tests into
+your project and make them pass with your own code (copy the tests, not the code).
+The commands below run this folder on its own.
 
-Starter code and tests for this week are coming. Follow the lesson to build it, and use
-your Week 4 project as the starting point.
+Move display into `journal/output.py` with a Rich table, then measure coverage. `output.py`
+is stubbed; `cli.py` already calls it. Fill it in until the tests pass.
+
+```bash
+uv sync
+uv run pytest -v        # red until output.list_entries is implemented
+# fill in journal/output.py
+uv run pytest -v        # green
+uv run pytest --cov=journal --cov-report=term-missing   # check coverage
+uv run ruff format .
+uv run ruff check --fix .
+```
+
+The solution is on the `solution` branch.
