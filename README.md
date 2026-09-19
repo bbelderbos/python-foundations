@@ -1,4 +1,4 @@
-# Python Foundations
+# Ship Your First Python App
 
 Starter code for the free [Python Foundations](https://belderbos.dev/foundations/) course:
 learn the local Python development workflow (uv, git, testing, your first PR) by building
