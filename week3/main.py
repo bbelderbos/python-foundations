@@ -78,7 +78,7 @@ def add(
         add_entry(title, content, tag_list, db)
         typer.echo("Entry saved.")
     except ValueError as e:
-        raise typer.BadParameter(str(e))
+        raise typer.BadParameter(str(e)) from e
 
 
 @app.command("list")

@@ -22,7 +22,7 @@ def add(
         JournalDatabase(db).add_entry(title, content, tag_list)
         typer.echo("Entry saved.")
     except ValueError as e:
-        raise typer.BadParameter(str(e))
+        raise typer.BadParameter(str(e)) from e
 
 
 @app.command("list")
