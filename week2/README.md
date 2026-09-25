@@ -2,6 +2,10 @@
 
 Lesson: https://belderbos.dev/foundations/#week-2
 
+Build in your own `dev-journal` repo, not in this folder: copy this week's tests into
+your project and make them pass with your own code (copy the tests, not the code).
+The commands below run this folder on its own.
+
 Add a Typer CLI (`add` and `list`) on top of your Week 1 model and persistence. The Week 1
 code is already in `main.py`; the two commands are stubbed with TODOs.
 
