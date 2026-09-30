@@ -20,9 +20,9 @@ def _display(entry: JournalEntry) -> None:
 
 @app.command()
 def add(
-    title: str = typer.Option(None, prompt="Title"),
-    content: str = typer.Option(None, prompt="Content"),
-    tags: str = typer.Option(None, prompt="Tags (comma separated)"),
+    title: str = typer.Option("", prompt="Title"),
+    content: str = typer.Option("", prompt="Content"),
+    tags: str = typer.Option("", prompt="Tags (comma separated)"),
     db: Path = typer.Option(DEFAULT_DB, hidden=True),
 ) -> None:
     tag_list = [t.strip() for t in tags.split(",") if t.strip()] if tags else []

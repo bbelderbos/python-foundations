@@ -52,9 +52,9 @@ def add_entry(title: str, content: str, tags: list[str], db_path: Path) -> None:
 
 @app.command()
 def add(
-    title: str = typer.Option(None, prompt="Title"),
-    content: str = typer.Option(None, prompt="Content"),
-    tags: str = typer.Option(None, prompt="Tags (comma separated)"),
+    title: str = typer.Option("", prompt="Title"),
+    content: str = typer.Option("", prompt="Content"),
+    tags: str = typer.Option("", prompt="Tags (comma separated)"),
     db: Path = typer.Option(Path("journal.json"), hidden=True),
 ) -> None:
     tag_list = [t.strip() for t in tags.split(",") if t.strip()] if tags else []
