@@ -1,6 +1,3 @@
-import tempfile
-from pathlib import Path
-
 import pytest
 from typer.testing import CliRunner
 
@@ -14,9 +11,10 @@ from main import (
 
 
 @pytest.fixture
-def db_file():
-    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as f:
-        yield Path(f.name)
+def db_file(tmp_path):
+    path = tmp_path / "journal.json"
+    path.touch()
+    return path
 
 
 @pytest.fixture
@@ -67,9 +65,9 @@ def test_matches_query_case_insensitive():
 
 
 def test_matches_query_content_and_tags():
-    entry = JournalEntry(title="Entry", content="I love pytest", tags=["testing"])
+    entry = JournalEntry(title="Entry", content="I love pytest", tags=["tooling"])
     assert matches_query(entry, "pytest")
-    assert matches_query(entry, "test")  # matches the tag
+    assert matches_query(entry, "tool")  # matches the tag
     assert not matches_query(entry, "nonexistent")
 
 
