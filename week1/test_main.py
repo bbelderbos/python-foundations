@@ -1,5 +1,4 @@
 import json
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -15,9 +14,10 @@ from main import (
 
 
 @pytest.fixture
-def db_file():
-    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as f:
-        yield Path(f.name)
+def db_file(tmp_path):
+    path = tmp_path / "journal.json"
+    path.touch()
+    return path
 
 
 def test_create_valid_entry():

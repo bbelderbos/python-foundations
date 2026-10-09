@@ -1,5 +1,4 @@
 import json
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -17,9 +16,10 @@ from main import (
 
 
 @pytest.fixture
-def db_file():
-    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as f:
-        yield Path(f.name)
+def db_file(tmp_path):
+    path = tmp_path / "journal.json"
+    path.touch()
+    return path
 
 
 @pytest.fixture
@@ -97,10 +97,14 @@ def test_cli_add_with_flags(db_file, runner):
         app,
         [
             "add",
-            "--title", "CLI Entry",
-            "--content", "Added via CLI",
-            "--tags", "python, cli",
-            "--db", str(db_file),
+            "--title",
+            "CLI Entry",
+            "--content",
+            "Added via CLI",
+            "--tags",
+            "python, cli",
+            "--db",
+            str(db_file),
         ],
     )
     assert result.exit_code == 0
@@ -112,10 +116,14 @@ def test_cli_add_invalid_title(db_file, runner):
         app,
         [
             "add",
-            "--title", "",
-            "--content", "Valid content",
-            "--tags", "",
-            "--db", str(db_file),
+            "--title",
+            "",
+            "--content",
+            "Valid content",
+            "--tags",
+            "",
+            "--db",
+            str(db_file),
         ],
     )
     assert result.exit_code != 0

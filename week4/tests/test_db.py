@@ -28,10 +28,10 @@ def test_search_by_title(db):
 
 
 def test_search_by_content_and_tags(db):
-    db.add_entry("Entry", "I love pytest", ["testing"])
+    db.add_entry("Entry", "I love pytest", ["tooling"])
     entries = db.load_entries()
     assert len(JournalDatabase.search_entries(entries, "pytest")) == 1
-    assert len(JournalDatabase.search_entries(entries, "test")) == 1  # tag match
+    assert len(JournalDatabase.search_entries(entries, "tool")) == 1  # tag match
 
 
 def test_search_case_insensitive(db):

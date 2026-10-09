@@ -10,21 +10,39 @@ def runner():
     return CliRunner()
 
 
-def test_cli_add_success(db, db_file, runner):
+def test_cli_add_success(db_file, runner):
     result = runner.invoke(
         app,
-        ["add", "--title", "Test Entry", "--content", "Test content",
-         "--tags", "python, testing", "--db", str(db_file)],
+        [
+            "add",
+            "--title",
+            "Test Entry",
+            "--content",
+            "Test content",
+            "--tags",
+            "python, testing",
+            "--db",
+            str(db_file),
+        ],
     )
     assert result.exit_code == 0
     assert "saved" in result.output.lower()
 
 
-def test_cli_add_failure(db, db_file, runner):
+def test_cli_add_failure(db_file, runner):
     result = runner.invoke(
         app,
-        ["add", "--title", "T" * (MAX_TITLE_LENGTH + 1),
-         "--content", "Valid", "--tags", "", "--db", str(db_file)],
+        [
+            "add",
+            "--title",
+            "T" * (MAX_TITLE_LENGTH + 1),
+            "--content",
+            "Valid",
+            "--tags",
+            "",
+            "--db",
+            str(db_file),
+        ],
     )
     assert result.exit_code != 0
 
@@ -38,7 +56,7 @@ def test_cli_list_entries(db, db_file, runner):
     assert "Entry Two" in result.output
 
 
-def test_cli_list_empty(db, db_file, runner):
+def test_cli_list_empty(db_file, runner):
     result = runner.invoke(app, ["list", "--db", str(db_file)])
     assert "no" in result.output.lower()
 
@@ -51,7 +69,7 @@ def test_cli_search(db, db_file, runner):
     assert "Rust Guide" not in result.output
 
 
-def test_cli_search_empty(db, db_file, runner):
+def test_cli_search_empty(db_file, runner):
     result = runner.invoke(app, ["search", "nonexistent", "--db", str(db_file)])
     assert "no" in result.output.lower()
 
